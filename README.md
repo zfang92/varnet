@@ -3,6 +3,7 @@ A Python package for deep learning using the method of Variational Annealing. Th
 
 # Functions
 A description can be found at the above repository. An Overleaf document will be updated regularly and can be found here https://www.overleaf.com/read/tzbcsjcycpcj.
+
 Current development TBA.
 
 # References
