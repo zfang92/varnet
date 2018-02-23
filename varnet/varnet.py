@@ -608,7 +608,7 @@ class Annealer(ADmin):
         # write fixed parameters to array
         W = []
         b = []
-        for i in xrange(self.Nbeta):
+        for i in xrange(self.Nbeta - 1, self.Nbeta):
             W.append([])
             b.append([])
             p_i0 = self.NDens
