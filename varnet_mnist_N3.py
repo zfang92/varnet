@@ -3,7 +3,7 @@ Example deep neural network annealing.
 """
 
 import numpy as np
-from /home/zhf018/varnet/ import varnet
+from varnet import varnet
 import sys, time
 
 ninit = int(sys.argv[1])
@@ -45,8 +45,8 @@ beta_array = np.linspace(0, 311, 312) # beta_array = np.linspace(0, 435, 436)
 ################################################################################
 # data_in = np.load("/home/zhf018/mnist/data/imtrain_norm.npy")[:M]
 # data_out = np.load("/home/zhf018/mnist/data/labtrain.npy")[:M]
-data_in = np.load("/home/zhf018/mnist_lite17/data/imtrain_noisy_[1, 7].npy")[:M]
-data_out = np.load("/home/zhf018/mnist_lite17/data/labtrain_noisy_[1, 7].npy")[:M]
+data_in = np.load("/home/zhf018/mnist/data/imtrain_noisy_[1, 7].npy")[:M]
+data_out = np.load("/home/zhf018/mnist/data/labtrain_noisy_[1, 7].npy")[:M]
 
 ################################################################################
 # Initial path/parameter guesses
@@ -108,7 +108,7 @@ Pidx = np.array(Pidx).flatten().tolist()
 # Annealing
 ################################################################################
 # Initialize Annealer
-anneal1 = va_nnet.Annealer()
+anneal1 = varnet.Annealer()
 # Set the network structure
 anneal1.set_structure(structure)
 # Set the activation function
@@ -127,7 +127,7 @@ print("\nADOL-C annealing completed in %f s."%(time.time() - tstart))
 # Save the results of annealing
 #anneal1.save_states("L%d_%s_%dex/states_%d.npy"%(L, suffix, M, ninit))
 #anneal1.save_params("params.npy")
-anneal1.save_action_errors("DH%d_%dex/action_errors_%d.npy"%(D_hidden, M, ninit))
+anneal1.save_action_errors("/home/zhf018/mnist17_N3/DH%d_%dex/action_errors_%d.npy"%(D_hidden, M, ninit))
 #anneal1.save_io("DH%d_%dex/io_%d.npy"%(D_hidden, M, ninit), dtype=np.float16)
-anneal1.save_Wb("DH%d_%dex/W_%d.npy"%(D_hidden, M, ninit),
-                "DH%d_%dex/b_%d.npy"%(D_hidden, M, ninit), dtype=np.float16)
+anneal1.save_Wb("/home/zhf018/mnist17_N3/DH%d_%dex/W_%d.npy"%(D_hidden, M, ninit),
+                "/home/zhf018/mnist17_N3/DH%d_%dex/b_%d.npy"%(D_hidden, M, ninit), dtype=np.float16)
