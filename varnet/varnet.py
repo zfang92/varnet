@@ -608,16 +608,16 @@ class Annealer(ADmin):
         # write fixed parameters to array
         W = []
         b = []
-        for i in xrange(self.Nbeta):
+        for i in xrange(self.Nbeta - 1, self.Nbeta):
             W.append([])
             b.append([])
             p_i0 = self.NDens
             p_i1 = self.NDens + self.structure[0]*self.structure[1] + self.structure[1]
             for n in xrange(self.N-1):
                 pn = self.minpaths[i, p_i0:p_i1]
-                W[i].append(np.reshape(pn[:self.structure[n]*self.structure[n+1]],
+                W[0].append(np.reshape(pn[:self.structure[n]*self.structure[n+1]],
                                        (self.structure[n+1], self.structure[n])))
-                b[i].append(pn[-self.structure[n+1]:])
+                b[0].append(pn[-self.structure[n+1]:])
 
                 if n < self.N - 2:
                     p_i0 = p_i1
@@ -626,10 +626,10 @@ class Annealer(ADmin):
         W = np.array(W)
         b = np.array(b)
 
-        for i in xrange(self.Nbeta):
+        for i in xrange(self.Nbeta - 1, self.Nbeta):
             for n in xrange(self.N-1):
-                W[i][n] = W[i][n].astype(dtype)
-                b[i][n] = b[i][n].astype(dtype)
+                W[0][n] = W[0][n].astype(dtype)
+                b[0][n] = b[0][n].astype(dtype)
         np.save(W_filename, W)
         np.save(b_filename, b)
 
