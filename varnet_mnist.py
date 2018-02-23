@@ -17,16 +17,16 @@ def sigmoid(x, W, b):
     return 1.0 / (1.0 + np.exp(-linpart))
 
 # Network structure
-N = 3  # Total number of layers
+N = 7  # Total number of layers
 D_in = 784  # Number of neurons in the input layer
 D_out = 2  # Number of neurons in the output layer
-#D_hidden = 30  # Number of neurons in the hidden layers
+#D_hidden = 15  # Number of neurons in the hidden layers
 
 structure = np.zeros(N, dtype='int')
-structure[0] = D_in  # 3 neurons in the input layer
-structure[N-1] = D_out  # 2 neurons in the output layer
+structure[0] = D_in  # Input layer
+structure[N-1] = D_out  # Output layer
 for i in range(1, N-1):
-    structure[i] = D_hidden  # 5 neurons in the hidden layers
+    structure[i] = D_hidden  # The hidden layers
 
 Lidx = [np.linspace(0, D_in-1, D_in, dtype='int'), np.linspace(0, D_out-1, D_out, dtype='int')]
 
@@ -127,7 +127,7 @@ print("\nADOL-C annealing completed in %f s."%(time.time() - tstart))
 # Save the results of annealing
 #anneal1.save_states("L%d_%s_%dex/states_%d.npy"%(L, suffix, M, ninit))
 #anneal1.save_params("params.npy")
-anneal1.save_action_errors("/home/zhf018/mnist17_N3/DH%d_%dex/action_errors_%d.npy"%(D_hidden, M, ninit))
+anneal1.save_action_errors("/home/zhf018/mnist17_N%d/DH%d_%dex/action_errors_%d.npy"%(N, D_hidden, M, ninit))
 #anneal1.save_io("DH%d_%dex/io_%d.npy"%(D_hidden, M, ninit), dtype=np.float16)
-anneal1.save_Wb("/home/zhf018/mnist17_N3/DH%d_%dex/W_%d.npy"%(D_hidden, M, ninit),
-                "/home/zhf018/mnist17_N3/DH%d_%dex/b_%d.npy"%(D_hidden, M, ninit), dtype=np.float16)
+anneal1.save_Wb("/home/zhf018/mnist17_N%d/DH%d_%dex/W_%d.npy"%(N, D_hidden, M, ninit),
+                "/home/zhf018/mnist17_N%d/DH%d_%dex/b_%d.npy"%(N, D_hidden, M, ninit), dtype=np.float16)
