@@ -17,7 +17,7 @@ def sigmoid(x, W, b):
     return 1.0 / (1.0 + np.exp(-linpart))
 
 # Network structure
-N = 7  # Total number of layers
+N = 22  # Total number of layers
 D_in = 784  # Number of neurons in the input layer
 D_out = 2  # Number of neurons in the output layer
 #D_hidden = 15  # Number of neurons in the hidden layers
@@ -38,7 +38,8 @@ RM = 1.0
 RF0 = 1.0e-8 * RM * float(np.sum(structure) - structure[0]) / float(structure[0] + structure[-1])
 # alpha, and beta ladder
 alpha = 1.1
-beta_array = np.linspace(0, 311, 312) # beta_array = np.linspace(0, 435, 436)
+# beta_array = np.linspace(0, 311, 312)
+beta_array = np.linspace(0, 435, 436)
 
 ################################################################################
 # Input and output data
