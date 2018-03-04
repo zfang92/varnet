@@ -11,7 +11,7 @@
 import os
 
 M = [100]
-D_hidden = [15]
+D_hidden = [5]
 
 Ninit = 50
 

@@ -17,7 +17,7 @@ def sigmoid(x, W, b):
     return 1.0 / (1.0 + np.exp(-linpart))
 
 # Network structure
-N = 22  # Total number of layers
+N = 3  # Total number of layers
 D_in = 784  # Number of neurons in the input layer
 D_out = 2  # Number of neurons in the output layer
 #D_hidden = 15  # Number of neurons in the hidden layers
@@ -38,8 +38,8 @@ RM = 1.0
 RF0 = 1.0e-8 * RM * float(np.sum(structure) - structure[0]) / float(structure[0] + structure[-1])
 # alpha, and beta ladder
 alpha = 1.1
-# beta_array = np.linspace(0, 311, 312)
-beta_array = np.linspace(0, 435, 436)
+beta_array = np.linspace(0, 311, 312)
+# beta_array = np.linspace(0, 435, 436)
 
 ################################################################################
 # Input and output data
@@ -131,4 +131,4 @@ print("\nADOL-C annealing completed in %f s."%(time.time() - tstart))
 anneal1.save_action_errors("/home/zhf018/mnist17_N%d/DH%d_%dex/action_errors_%d.npy"%(N, D_hidden, M, ninit))
 #anneal1.save_io("DH%d_%dex/io_%d.npy"%(D_hidden, M, ninit), dtype=np.float16)
 anneal1.save_Wb("/home/zhf018/mnist17_N%d/DH%d_%dex/W_%d.npy"%(N, D_hidden, M, ninit),
-                "/home/zhf018/mnist17_N%d/DH%d_%dex/b_%d.npy"%(N, D_hidden, M, ninit), dtype=np.float16)
+                "/home/zhf018/mnist17_N%d/DH%d_%dex/b_%d.npy"%(N, D_hidden, M, ninit), dtype=np.float64)
