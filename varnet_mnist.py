@@ -16,11 +16,27 @@ def sigmoid(x, W, b):
     linpart = np.dot(W, x) + b
     return 1.0 / (1.0 + np.exp(-linpart))
 
-# Network structure
-N = 3  # Total number of layers
-D_in = 784  # Number of neurons in the input layer
-D_out = 10  # Number of neurons in the output layer
-# D_out = 2  # Number of neurons in the output layer
+################################################################################
+# Global parameter setting
+################################################################################
+
+# Total number of layers
+N = 3
+# Number of neurons in the input layer, should be fixed to 784
+D_in = 784
+# Number of neurons in the output layer
+D_out = 10
+
+# Specify training set
+file_in = "/home/zhf018/mnist/data/Yin_norm.npy"
+file_out = "/home/zhf018/mnist/data/Yout.npy"
+
+# Specify folder to save, e.g. "mnist" or "mnist17"
+foldername = "mnist"
+
+################################################################################
+# Set network structure
+################################################################################
 
 structure = np.zeros(N, dtype='int')
 structure[0] = D_in  # Input layer
@@ -33,6 +49,7 @@ Lidx = [np.linspace(0, D_in-1, D_in, dtype='int'), np.linspace(0, D_out-1, D_out
 ################################################################################
 # Action/annealing parameters
 ################################################################################
+
 # RM, RF0
 RM = 1.0
 RF0 = 1.0e-8 * RM * float(np.sum(structure) - structure[0]) / float(structure[0] + structure[-1])
@@ -45,8 +62,8 @@ beta_array = np.linspace(0, 311, 312)
 # Input and output data
 ################################################################################
 
-data_in = np.load("/home/zhf018/mnist/data/Yin_norm.npy")[:M]
-data_out = np.load("/home/zhf018/mnist/data/Yout.npy")[:M]
+data_in = np.load(file_in)[:M]
+data_out = np.load(file_out)[:M]
 
 # data_in = np.load("/home/zhf018/mnist/data/Yin_norm_17.npy")[:M]
 # data_out = np.load("/home/zhf018/mnist/data/Yout_17.npy")[:M]
@@ -130,7 +147,7 @@ print("\nADOL-C annealing completed in %f s."%(time.time() - tstart))
 # Save the results of annealing
 #anneal1.save_states("L%d_%s_%dex/states_%d.npy"%(L, suffix, M, ninit))
 #anneal1.save_params("params.npy")
-anneal1.save_action_errors("/home/zhf018/mnist17_N%d/DH%d_%dex/action_errors_%d.npy"%(N, D_hidden, M, ninit))
+anneal1.save_action_errors("/home/zhf018/" + foldername + "_N%d/DH%d_%dex/action_errors_%d.npy"%(N, D_hidden, M, ninit))
 #anneal1.save_io("DH%d_%dex/io_%d.npy"%(D_hidden, M, ninit), dtype=np.float16)
-anneal1.save_Wb("/home/zhf018/mnist17_N%d/DH%d_%dex/W_%d.npy"%(N, D_hidden, M, ninit),
-                "/home/zhf018/mnist17_N%d/DH%d_%dex/b_%d.npy"%(N, D_hidden, M, ninit), dtype=np.float64)
+anneal1.save_Wb("/home/zhf018/" + foldername + "_N%d/DH%d_%dex/W_%d.npy"%(N, D_hidden, M, ninit),
+                "/home/zhf018/" + foldername + "_N%d/DH%d_%dex/b_%d.npy"%(N, D_hidden, M, ninit), dtype=np.float64)
