@@ -46,8 +46,12 @@ beta_array = np.linspace(0, 311, 312)
 ################################################################################
 # data_in = np.load("/home/zhf018/mnist/data/imtrain_norm.npy")[:M]
 # data_out = np.load("/home/zhf018/mnist/data/labtrain.npy")[:M]
-data_in = np.load("/home/zhf018/mnist/data/imtrain_noisy_[1, 7].npy")[:M]
-data_out = np.load("/home/zhf018/mnist/data/labtrain_noisy_[1, 7].npy")[:M]
+
+# data_in = np.load("/home/zhf018/mnist/data/imtrain_noisy_[1, 7].npy")[:M]
+# data_out = np.load("/home/zhf018/mnist/data/labtrain_noisy_[1, 7].npy")[:M]
+
+data_in = np.load("/home/zhf018/mnist/data/Yin_norm_17.npy")[:M]
+data_out = np.load("/home/zhf018/mnist/data/Yout_17.npy")[:M]
 
 ################################################################################
 # Initial path/parameter guesses
