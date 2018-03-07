@@ -19,8 +19,8 @@ def sigmoid(x, W, b):
 # Network structure
 N = 3  # Total number of layers
 D_in = 784  # Number of neurons in the input layer
-D_out = 2  # Number of neurons in the output layer
-#D_hidden = 15  # Number of neurons in the hidden layers
+D_out = 10  # Number of neurons in the output layer
+# D_out = 2  # Number of neurons in the output layer
 
 structure = np.zeros(N, dtype='int')
 structure[0] = D_in  # Input layer
@@ -44,14 +44,12 @@ beta_array = np.linspace(0, 311, 312)
 ################################################################################
 # Input and output data
 ################################################################################
-# data_in = np.load("/home/zhf018/mnist/data/imtrain_norm.npy")[:M]
-# data_out = np.load("/home/zhf018/mnist/data/labtrain.npy")[:M]
 
-# data_in = np.load("/home/zhf018/mnist/data/imtrain_noisy_[1, 7].npy")[:M]
-# data_out = np.load("/home/zhf018/mnist/data/labtrain_noisy_[1, 7].npy")[:M]
+data_in = np.load("/home/zhf018/mnist/data/Yin_norm.npy")[:M]
+data_out = np.load("/home/zhf018/mnist/data/Yout.npy")[:M]
 
-data_in = np.load("/home/zhf018/mnist/data/Yin_norm_17.npy")[:M]
-data_out = np.load("/home/zhf018/mnist/data/Yout_17.npy")[:M]
+# data_in = np.load("/home/zhf018/mnist/data/Yin_norm_17.npy")[:M]
+# data_out = np.load("/home/zhf018/mnist/data/Yout_17.npy")[:M]
 
 ################################################################################
 # Initial path/parameter guesses
