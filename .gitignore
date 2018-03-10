@@ -4,6 +4,7 @@
 *.pyc
 *.png
 *.pdf
+*.tap
 output
 
 # Byte-compiled / optimized / DLL files

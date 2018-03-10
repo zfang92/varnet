@@ -16,37 +16,69 @@ def sigmoid(x, W, b):
     linpart = np.dot(W, x) + b
     return 1.0 / (1.0 + np.exp(-linpart))
 
-# Network structure
-N = 3  # Total number of layers
-D_in = 784  # Number of neurons in the input layer
-D_out = 2  # Number of neurons in the output layer
-#D_hidden = 30  # Number of neurons in the hidden layers
+################################################################################
+# Global parameter setting
+################################################################################
+
+# Total number of layers
+N = 3
+# Number of neurons in the input layer, should be fixed to 784
+D_in = 784
+# Number of neurons in the output layer
+D_out = 2
+
+# Specify training set
+file_in = "/home/zhf018/mnist/data/Yin_norm_17.npy"
+file_out = "/home/zhf018/mnist/data/Yout_17.npy"
+
+# Specify folder to save, e.g. "mnist" or "mnist17"
+foldername = "mnist17"
+
+# RM
+RM = 1
+
+# Number of annealing steps, usually between 312 and 436
+Nsteps = 312
+
+# Print parameters
+# print("N = %d, DH = %d, M = %d\n"%(N, D_hiddden, M))
+# print("D_in = %d, D_out = %d\n"%(D_in, D_out))
+# print("Rm = %d, Nsteps = %d\n"%(RM, Nsteps))
+# print(file_in + "\n")
+# print(file_out)
+
+################################################################################
+# Set network structure
+################################################################################
 
 structure = np.zeros(N, dtype='int')
-structure[0] = D_in  # 3 neurons in the input layer
-structure[N-1] = D_out  # 2 neurons in the output layer
+structure[0] = D_in  # Input layer
+structure[N-1] = D_out  # Output layer
 for i in range(1, N-1):
-    structure[i] = D_hidden  # 5 neurons in the hidden layers
+    structure[i] = D_hidden  # The hidden layers
 
 Lidx = [np.linspace(0, D_in-1, D_in, dtype='int'), np.linspace(0, D_out-1, D_out, dtype='int')]
 
 ################################################################################
 # Action/annealing parameters
 ################################################################################
-# RM, RF0
-RM = 1.0
+
+# RF0
 RF0 = 1.0e-8 * RM * float(np.sum(structure) - structure[0]) / float(structure[0] + structure[-1])
 # alpha, and beta ladder
 alpha = 1.1
-beta_array = np.linspace(0, 311, 312) # beta_array = np.linspace(0, 435, 436)
+beta_array = np.linspace(0, Nsteps - 1, Nsteps)
+# beta_array = np.linspace(0, 435, 436)
 
 ################################################################################
 # Input and output data
 ################################################################################
-# data_in = np.load("/home/zhf018/mnist/data/imtrain_norm.npy")[:M]
-# data_out = np.load("/home/zhf018/mnist/data/labtrain.npy")[:M]
-data_in = np.load("/home/zhf018/mnist/data/imtrain_noisy_[1, 7].npy")[:M]
-data_out = np.load("/home/zhf018/mnist/data/labtrain_noisy_[1, 7].npy")[:M]
+
+data_in = np.load(file_in)[:M]
+data_out = np.load(file_out)[:M]
+
+# data_in = np.load("/home/zhf018/mnist/data/Yin_norm_17.npy")[:M]
+# data_out = np.load("/home/zhf018/mnist/data/Yout_17.npy")[:M]
 
 ################################################################################
 # Initial path/parameter guesses
@@ -127,7 +159,7 @@ print("\nADOL-C annealing completed in %f s."%(time.time() - tstart))
 # Save the results of annealing
 #anneal1.save_states("L%d_%s_%dex/states_%d.npy"%(L, suffix, M, ninit))
 #anneal1.save_params("params.npy")
-anneal1.save_action_errors("/home/zhf018/mnist17_N3/DH%d_%dex/action_errors_%d.npy"%(D_hidden, M, ninit))
+anneal1.save_action_errors("/home/zhf018/" + foldername + "_N%d/DH%d_%dex/action_errors_%d.npy"%(N, D_hidden, M, ninit))
 #anneal1.save_io("DH%d_%dex/io_%d.npy"%(D_hidden, M, ninit), dtype=np.float16)
-anneal1.save_Wb("/home/zhf018/mnist17_N3/DH%d_%dex/W_%d.npy"%(D_hidden, M, ninit),
-                "/home/zhf018/mnist17_N3/DH%d_%dex/b_%d.npy"%(D_hidden, M, ninit), dtype=np.float16)
+anneal1.save_Wb("/home/zhf018/" + foldername + "_N%d/DH%d_%dex/W_%d.npy"%(N, D_hidden, M, ninit),
+                "/home/zhf018/" + foldername + "_N%d/DH%d_%dex/b_%d.npy"%(N, D_hidden, M, ninit), dtype=np.float64)
