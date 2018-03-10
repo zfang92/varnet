@@ -10,7 +10,7 @@
 
 import os
 
-M = [100]
+M = [1000]
 D_hidden = [15]
 
 Ninit = 50

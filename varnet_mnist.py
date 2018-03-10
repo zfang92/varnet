@@ -25,14 +25,27 @@ N = 3
 # Number of neurons in the input layer, should be fixed to 784
 D_in = 784
 # Number of neurons in the output layer
-D_out = 10
+D_out = 2
 
 # Specify training set
-file_in = "/home/zhf018/mnist/data/Yin_norm.npy"
-file_out = "/home/zhf018/mnist/data/Yout.npy"
+file_in = "/home/zhf018/mnist/data/Yin_norm_17.npy"
+file_out = "/home/zhf018/mnist/data/Yout_17.npy"
 
 # Specify folder to save, e.g. "mnist" or "mnist17"
-foldername = "mnist"
+foldername = "mnist17"
+
+# RM
+RM = 1
+
+# Number of annealing steps, usually between 312 and 436
+Nsteps = 312
+
+# Print parameters
+# print("N = %d, DH = %d, M = %d\n"%(N, D_hiddden, M))
+# print("D_in = %d, D_out = %d\n"%(D_in, D_out))
+# print("Rm = %d, Nsteps = %d\n"%(RM, Nsteps))
+# print(file_in + "\n")
+# print(file_out)
 
 ################################################################################
 # Set network structure
@@ -50,12 +63,11 @@ Lidx = [np.linspace(0, D_in-1, D_in, dtype='int'), np.linspace(0, D_out-1, D_out
 # Action/annealing parameters
 ################################################################################
 
-# RM, RF0
-RM = 1.0
+# RF0
 RF0 = 1.0e-8 * RM * float(np.sum(structure) - structure[0]) / float(structure[0] + structure[-1])
 # alpha, and beta ladder
 alpha = 1.1
-beta_array = np.linspace(0, 311, 312)
+beta_array = np.linspace(0, Nsteps - 1, Nsteps)
 # beta_array = np.linspace(0, 435, 436)
 
 ################################################################################
