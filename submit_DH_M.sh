@@ -10,8 +10,8 @@
 
 import os
 
-M = [100]
-D_hidden = [1]
+M = [500]
+D_hidden = [25, 30]
 
 Ninit = 50
 
@@ -32,4 +32,4 @@ print(os.system("uname -n"))
 #if i_M == 4:
 #    print("Skipping M=1000 case.")
 #else:
-os.system("python2 varnet_mnist_N3.py %d %d %d %d"%(initID, M[i_M], D_hidden[i_DH], adolcID))
+os.system("python2 varnet_mnist.py %d %d %d %d"%(initID, M[i_M], D_hidden[i_DH], adolcID))
